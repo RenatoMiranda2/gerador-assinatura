@@ -9,6 +9,7 @@
       padding: 40px;
       background-color: #f7f7f7;
     }
+
     .container {
       background: #fff;
       padding: 20px;
@@ -17,6 +18,7 @@
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
+
     .titulo-site {
       text-align: center;
       font-size: 22px;
@@ -24,10 +26,12 @@
       margin-bottom: 20px;
       color: #005288;
     }
+
     label {
       display: block;
       margin-top: 10px;
     }
+
     input, select {
       width: 100%;
       padding: 8px;
@@ -35,31 +39,40 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
+
     .assinatura {
       display: flex;
       align-items: center;
       gap: 12px;
       font-size: 14px;
       margin-top: 30px;
-      background-color: #f0f0f0;
+      background-color: #FFFFFF;
       padding: 15px;
       border-radius: 12px;
     }
-    .assinatura img {
-      width: 80px;
+
+    .assinatura img.logo {
+     height: 80px;
+     width: auto;
+     max-width: 100px;
     }
+
     .assinatura strong {
       font-size: 16px;
-      color: #005288;
+      color: #000000;
     }
+
     .info span {
       display: block;
       margin-top: 2px;
     }
+
     .info a {
       color: #005288;
       text-decoration: none;
+      
     }
+
     .btn {
       display: inline-block;
       margin-top: 20px;
@@ -74,8 +87,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="titulo-site">Câmara Municipal de Timóteo</div>
-    <h2>Gerador de Assinatura</h2>
+    <div class="titulo-site">Gerador de Assinatura</div>
 
     <label for="nome">Nome:</label>
     <input type="text" id="nome" oninput="atualizarAssinatura()" placeholder="Ex: Renato Soares Miranda">
@@ -83,7 +95,7 @@
     <label for="cargo">Cargo:</label>
     <input type="text" id="cargo" oninput="atualizarAssinatura()" placeholder="Ex: Gerente de TI">
 
-    <label for="telefone">Telefone:</label>
+    <label for="telefone">WhatsApp:</label>
     <input type="text" id="telefone" oninput="atualizarTelefone()" placeholder="31985004983">
 
     <label for="setor">Selecione o setor (email):</label>
@@ -100,13 +112,14 @@
     </select>
 
     <div id="assinatura" class="assinatura">
-      <img src="https://raw.githubusercontent.com/RenatoMiranda2/logo-camara/refs/heads/main/logo.png" alt="Logo">
+      <img class="logo" src="https://raw.githubusercontent.com/RenatoMiranda2/logo-camara/refs/heads/main/logo.png" alt="Logo Câmara">
       <div class="info">
         <strong id="prev-nome">Seu Nome</strong>
         <span id="prev-cargo">Seu Cargo</span>
-        <span>📞 <a id="prev-telefone" href="#">(31) 91234-5678</a></span>
+        <span>📱 <a id="prev-telefone" href="#">(31) 91234-5678</a></span>
         <span>📧 <a id="prev-email" href="#">email@exemplo.com</a></span>
         <span>🌐 <a href="https://www.timoteo.mg.leg.br" target="_blank">www.timoteo.mg.leg.br</a></span>
+        <span style="font-weight: bold; color: #005288;">Câmara Municipal de Timóteo</span>
       </div>
     </div>
 
@@ -125,7 +138,7 @@
         tel = `(${tel.substring(0, 2)}) ${tel.substring(2, 7)}-${tel.substring(7)}`;
       }
       document.getElementById("prev-telefone").textContent = tel || "(31) 91234-5678";
-      document.getElementById("prev-telefone").href = tel ? `tel:+55${tel.replace(/\D/g, "")}` : "#";
+      document.getElementById("prev-telefone").href = tel ? `https://wa.me/55${tel.replace(/\D/g, "")}` : "#";
     }
 
     function atualizarEmail() {
