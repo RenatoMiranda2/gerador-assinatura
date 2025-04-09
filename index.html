@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Assinatura</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f7f7f7;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .assinatura {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      margin-top: 30px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    .assinatura img {
+      width: 80px;
+    }
+    .assinatura strong {
+      font-size: 16px;
+      color: #005288;
+    }
+    .info span {
+      display: block;
+      margin-top: 2px;
+    }
+    .info a {
+      color: #005288;
+      text-decoration: none;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #005288;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Gerador de Assinatura</h2>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" oninput="atualizarAssinatura()" placeholder="Ex: Renato Soares Miranda">
+
+    <label for="cargo">Cargo:</label>
+    <input type="text" id="cargo" oninput="atualizarAssinatura()" placeholder="Ex: Gerente de TI">
+
+    <label for="telefone">Telefone:</label>
+    <input type="text" id="telefone" oninput="atualizarTelefone()" placeholder="31985004983">
+
+    <label for="setor">Selecione o setor (email):</label>
+    <select id="setor" onchange="atualizarEmail()">
+      <option value="">Selecione o setor</option>
+      <option value="juridica@timoteo.mg.leg.br">Procuradoria Geral</option>
+      <option value="contab@timoteo.mg.leg.br">Contabilidade e Tesouraria</option>
+      <option value="recursoshumanos@timoteo.mg.leg.br">Recursos Humanos</option>
+      <option value="compras@timoteo.mg.leg.br">Secretaria Administrativa</option>
+      <option value="comunicacaosocial@timoteo.mg.leg.br">Comunicação Social</option>
+      <option value="controladoria@timoteo.mg.leg.br">Controladoria</option>
+      <option value="ouvidoria@timoteo.mg.leg.br">Ouvidoria</option>
+      <option value="ti@timoteo.mg.leg.br">Centro de Tecnologia da Informação</option>
+    </select>
+
+    <div id="assinatura" class="assinatura">
+      <img src="https://raw.githubusercontent.com/RenatoMiranda2/logo-camara/refs/heads/main/logo.png" alt="Logo">
+      <div class="info">
+        <strong id="prev-nome">Seu Nome</strong>
+        <span id="prev-cargo">Seu Cargo</span>
+        <span>📞 <a id="prev-telefone" href="#">(31) 91234-5678</a></span>
+        <span>📧 <a id="prev-email" href="#">email@exemplo.com</a></span>
+        <span>🌐 <a href="https://www.timoteo.mg.leg.br" target="_blank">www.timoteo.mg.leg.br</a></span>
+      </div>
+    </div>
+
+    <button class="btn" onclick="copiarAssinatura()">📋 Copiar assinatura pronta</button>
+  </div>
+
+  <script>
+    function atualizarAssinatura() {
+      document.getElementById("prev-nome").textContent = document.getElementById("nome").value || "Seu Nome";
+      document.getElementById("prev-cargo").textContent = document.getElementById("cargo").value || "Seu Cargo";
+    }
+
+    function atualizarTelefone() {
+      let tel = document.getElementById("telefone").value.replace(/\D/g, "");
+      if (tel.length === 11) {
+        tel = `(${tel.substring(0, 2)}) ${tel.substring(2, 7)}-${tel.substring(7)}`;
+      }
+      document.getElementById("prev-telefone").textContent = tel || "(31) 91234-5678";
+      document.getElementById("prev-telefone").href = tel ? `tel:+55${tel.replace(/\D/g, "")}` : "#";
+    }
+
+    function atualizarEmail() {
+      const emailSelecionado = document.getElementById("setor").value;
+      const linkEmail = document.getElementById("prev-email");
+      if (emailSelecionado) {
+        linkEmail.textContent = emailSelecionado;
+        linkEmail.href = "mailto:" + emailSelecionado;
+      } else {
+        linkEmail.textContent = "email@exemplo.com";
+        linkEmail.href = "#";
+      }
+    }
+
+    function copiarAssinatura() {
+      const el = document.getElementById("assinatura");
+      const range = document.createRange();
+      range.selectNode(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try {
+        document.execCommand("copy");
+        alert("Assinatura copiada! Agora cole no Gmail (Ctrl + V)");
+      } catch (err) {
+        alert("Erro ao copiar. Copie manualmente.");
+      }
+      sel.removeAllRanges();
+    }
+  </script>
+</body>
+</html>
