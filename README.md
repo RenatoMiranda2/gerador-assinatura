@@ -18,7 +18,8 @@ A assinatura pode ser copiada e colada diretamente no Gmail ou outro cliente de 
 
 ## 🖼️ Exemplo da assinatura gerada
 
-<img src="https://raw.githubusercontent.com/RenatoMiranda2/logo-camara/main/exemplo-assinatura.png" width="500" />
+![image](https://github.com/user-attachments/assets/7cdeba88-c314-4db5-9672-5110f832f8c5)
+
 
 ---
 
